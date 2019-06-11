@@ -7,7 +7,10 @@ if [ "$ENV" = 'DEV' ]; then
 elif [ "$ENV" = 'UNIT']; then
   echo "Running Unit Tests"
   exec python "tests.py"
-else
+elif [ "$ENV" = 'UNIT']; then
+  echo "Running WHOAMI"
+  exec uwsgi --http 0.0.0.0:9090 --wsgi-file /app/whoami.py --callable app --stats 0.0.0.0:9191 
+else 
   echo "Running Production Server"
   exec uwsgi --http 0.0.0.0:9090 --wsgi-file /app/identidock.py --callable app --stats 0.0.0.0:9191
 fi
