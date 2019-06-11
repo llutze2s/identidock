@@ -15,7 +15,7 @@ class TestCase(unittest.TestCase):
 
    def test_html_escaping(self):
        page = self.app.post("/", data=dict(name='"><b>TEST</b><!--"'))
-       assert '<b>' not in str(page.data) # Prüfen ob HTML abgefangen wird
+       assert '<b>' not in str(page.data) # Prüfen ob HTML in der Nameseingabe abgefangen wird
 
 if __name__ == '__main__':
    unittest.main()
