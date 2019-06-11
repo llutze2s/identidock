@@ -14,7 +14,8 @@ def mainpage():
 
     name = default_name
     if request.method == 'POST': # Funktionalität für den Button
-        name = request.form['name']
+        #name = request.form['name'] musste für html abfragen geändert werden
+        name = html.escape(request.form['name'], quote=true)
 
     salted_name = salt + name #"rnd" wert mit namen addieren
     name_hash = hashlib.sha256(salted_name.encode()).hexdigest() #hashen und als hexa wert abspeichern
@@ -34,6 +35,7 @@ def mainpage():
 @app.route('/monster/<name>')
 def get_identicon(name):
 
+    name = html.escape(name, quote=True) # HTML abfangen
     image = cache.get(name)
     if image is None:  # vergleicht ob bild im cache
         print ("Cache miss", flush=True)
