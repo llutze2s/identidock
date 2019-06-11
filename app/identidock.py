@@ -2,6 +2,7 @@ from flask import Flask, Response, request # Response welches Bilder bereitstell
 import requests # dnmonster service 
 import hashlib # hash bib einbinden
 import redis
+import html
 
 app = Flask(__name__)
 
@@ -15,7 +16,7 @@ def mainpage():
     name = default_name
     if request.method == 'POST': # Funktionalität für den Button
         #name = request.form['name'] musste für html abfragen geändert werden
-        name = html.escape(request.form['name'], quote=true)
+        name = html.escape(request.form['name'], quote=True)
 
     salted_name = salt + name #"rnd" wert mit namen addieren
     name_hash = hashlib.sha256(salted_name.encode()).hexdigest() #hashen und als hexa wert abspeichern
